@@ -3,6 +3,9 @@ import { fetchCreateApi } from "./modules/action";
 import { connect } from "react-redux";
 
 class CreateAcc extends Component {
+  componentDidMount() {
+    document.title = "Đăng ký | Dịch vụ công";
+  }
   constructor(props) {
     super(props);
     this.state = {

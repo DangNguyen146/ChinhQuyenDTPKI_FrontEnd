@@ -17,7 +17,7 @@ class Login extends Component {
     };
   }
   componentDidMount() {
-    document.title = "Đăng nhập | Space";
+    document.title = "Đăng nhập | Dịch vụ công";
 
     Axios.get(urlApi + `oauth2-info/`)
       .then((res) => {
