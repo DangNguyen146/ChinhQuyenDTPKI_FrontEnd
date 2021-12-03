@@ -4,49 +4,79 @@ import { connect } from "react-redux";
 import Axios from "axios";
 import { urlApi } from "../../../../config/api";
 import { Link } from "react-router-dom";
+import { fetchResetPasswordApi } from "./modules/actionReset";
+import toast, { Toaster } from "react-hot-toast";
+import { GoogleLogin } from "react-google-login";
+import { fetchGoogleLoginApi } from "./modules/actionGoogleLogin";
+import FacebookLogin from "react-facebook-login";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      email: "",
       password: "",
-      client_id: "",
-      client_secret: "",
-      grant_type: "password",
     };
   }
   componentDidMount() {
     document.title = "Đăng nhập | Dịch vụ công";
-
-    Axios.get(urlApi + `oauth2-info/`)
-      .then((res) => {
-        const data = res.data;
-        if (data) {
-          this.setState({
-            client_id: data.client_id,
-            client_secret: data.client_sercet,
-          });
-        }
-      })
-      .catch((error) => console.log(error));
   }
-
+  renderGoogle = () => {
+    return <div></div>;
+  };
   handleOnChange = (e) => {
     const { name, value } = e.target;
     this.setState({
       [name]: value,
     });
   };
-
   handleLogin = (e) => {
     e.preventDefault();
     this.props.fetchLogin(this.state, this.props.history);
   };
+  handleReset = (e) => {
+    e.preventDefault();
+    this.props.fetchResetLogin(this.state.email, this.props.history);
+  };
   renderNoti = () => {
     const { err } = this.props;
-    if (err)
-      return <div className="alert alert-danger p-2">{err.response.data}</div>;
+    console.log(err);
+    if (err) {
+      const erros = err;
+      return (
+        <div className="alert alert-danger p-2">
+          {erros.email ? (
+            <p className="mb-0">Email: {erros.email ? erros.email : ""}</p>
+          ) : (
+            ""
+          )}
+          {erros.password ? (
+            <p className="mb-0">
+              Password: {erros.password ? erros.password : ""}
+            </p>
+          ) : (
+            <p className="mb-0">{erros.detail}</p>
+          )}
+        </div>
+      );
+    }
+    if (err && err.detail) {
+      const erros = err.detail;
+      return (
+        <div className="alert alert-danger p-2">
+          {erros ? (
+            <p className="mb-0">
+              Vui lòng xác thực email. Nếu mã xác thực hết hạn, ấn{" "}
+              <Link to="/resendMaXacThuc">tại đây</Link>
+            </p>
+          ) : (
+            <>
+              <p className="mb-0">{erros.detail}</p>
+            </>
+          )}
+        </div>
+      );
+    }
   };
   renderLoding = () => {
     const { loading } = this.props;
@@ -61,6 +91,14 @@ class Login extends Component {
     );
   };
   render() {
+    const responseGoogle = (response) => {
+      this.props.fetchLoginGoogle(response.tokenId, this.props.history);
+    };
+    const responseFacebook = (response) => {
+      console.log(response);
+    };
+
+    const notify = () => toast.success("Vui lòng check mail");
     return (
       <section
         className="loginPage container-fluid p-0"
@@ -82,16 +120,17 @@ class Login extends Component {
             >
               <div className="container py-5 rounded shadow overflow-hidden bg-light">
                 <h2 className="text-center">Đăng nhập</h2>
+                {this.renderNoti()}
                 <form onSubmit={this.handleLogin} action="#">
                   <div className="mb-3">
                     <label htmlFor="exampleInputName" className="form-label">
-                      Tên đăng nhâp
+                      Email
                     </label>
                     <input
-                      type="text"
+                      type="email"
                       className="form-control"
                       id="exampleInputName"
-                      name="username"
+                      name="email"
                       onChange={this.handleOnChange}
                     />
                   </div>
@@ -110,22 +149,92 @@ class Login extends Component {
                       onChange={this.handleOnChange}
                     />
                   </div>
-                  <div className="mb-3 form-check">
-                    <input
-                      type="checkbox"
-                      className="form-check-input"
-                      id="exampleCheck1"
-                    />
-                    <label className="form-check-label" htmlFor="exampleCheck1">
-                      Lưu đăng nhập
-                    </label>
+                  <div className="mb-3">
+                    <a
+                      type="button"
+                      className=""
+                      data-mdb-toggle="modal"
+                      data-mdb-target="#exampleModal"
+                    >
+                      Quên mật khẩu
+                    </a>
                   </div>
+                  <Link to="/resendMaXacThuc">Xác minh tại đây</Link>
                   <div className="col-12 text-center">
                     <button type="submit" className="btn buttonPurple px-2 ">
                       Đăng nhập
                     </button>
                   </div>
                 </form>
+                <div className="text-center mt-5">
+                  <Toaster />
+                  <div>
+                    <div
+                      className="modal fade"
+                      id="exampleModal"
+                      tabIndex={-1}
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div className="modal-dialog">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">
+                              Vui lòng nhập email
+                            </h5>
+                            <button
+                              type="button"
+                              className="btn-close"
+                              data-mdb-dismiss="modal"
+                              aria-label="Close"
+                            />
+                          </div>
+                          <div className="modal-body">
+                            <form onSubmit={this.handleReset} action="#">
+                              <div className="mb-3">
+                                <input
+                                  type="email"
+                                  className="form-control"
+                                  id="exampleInputName"
+                                  name="email"
+                                  onChange={this.handleOnChange}
+                                />
+                              </div>
+                              <div className="col-12 text-center">
+                                <button
+                                  type="submit"
+                                  className="btn buttonPurple px-2 "
+                                  onClick={() => {
+                                    notify();
+                                  }}
+                                >
+                                  Gửi
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-5">
+                  <GoogleLogin
+                    clientId="176086686228-v8o6usaae3vfhjnt1n8gslkjb32tvpfo.apps.googleusercontent.com"
+                    buttonText="Login"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={"single_host_origin"}
+                  />
+
+                  {/* <FacebookLogin
+                    appId="1931992926962753"
+                    autoLoad={true}
+                    fields="name,email,picture"
+                    callback={responseFacebook}
+                  /> */}
+                </div>
+
                 <div className="text-center mt-5">
                   <p className="d-inline fw-bold">Hoặc đăng kí tài khoản </p>
                   <Link to="/signin">Tại đây</Link>
@@ -144,6 +253,7 @@ const mapStateToProps = (state) => {
   return {
     loading: state.userLoginReducer.loading,
     err: state.userLoginReducer.err,
+    data: state.userResendReducer.data,
   };
 };
 
@@ -151,6 +261,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchLogin: (user, histoty) => {
       dispatch(fetchLoginApi(user, histoty));
+    },
+    fetchResetLogin: (data, history) => {
+      dispatch(fetchResetPasswordApi(data, history));
+    },
+    fetchLoginGoogle: (data, history) => {
+      dispatch(fetchGoogleLoginApi(data, history));
     },
   };
 };

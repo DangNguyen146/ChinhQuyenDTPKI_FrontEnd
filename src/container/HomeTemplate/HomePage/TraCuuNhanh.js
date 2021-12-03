@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class TraCuuNhanh extends Component {
   render() {
@@ -6,31 +7,32 @@ class TraCuuNhanh extends Component {
       <div className="container TraCuuNhanh">
         <div className="row">
           <div className="d-none d-md-block col"></div>
-          <div className="d-none d-md-block col-3">
+          <div className="d-none d-md-block col-4">
             <div className="bg-blue w-100 py-3 px-4 rounded shadow text-center">
               <i
-                class="fa fa-search mb-2 w-100"
+                className="fa fa-search mb-2 w-100"
                 style={{ fontSize: "2rem" }}
               ></i>
-              <p className="fw-bold">Tra cứu thủ tục hành chính</p>
+              <Link
+                className="fw-bold text-decoration-none text-white"
+                to="/tracuu"
+              >
+                Tra cứu thủ tục hành chính
+              </Link>
             </div>
           </div>
-          <div className="d-none d-md-block col-3">
+          <div className="d-none d-md-block col-4">
             <div className="bg-blue w-100 py-3 px-4 rounded shadow text-center">
               <i
-                class="fa fa-check-square mb-2 w-100"
+                className="fa fa-check-square mb-2 w-100"
                 style={{ fontSize: "2rem" }}
               ></i>
-              <p className="fw-bold">Tra cứu trang thái hộ sơ</p>
-            </div>
-          </div>
-          <div className="d-none d-md-block col-3">
-            <div className="bg-blue w-100 py-3 px-4 rounded shadow text-center">
-              <i
-                class="fa fa-circle-o mb-2 w-100"
-                style={{ fontSize: "2rem" }}
-              ></i>
-              <p className="fw-bold">Nộp hồ sơ trực tuyến</p>
+              <Link
+                className=" text-decoration-none text-white fw-bold"
+                to="/tinhtranghoso"
+              >
+                Tra cứu trang thái hộ sơ
+              </Link>
             </div>
           </div>
           <div className="d-none d-md-block col"></div>

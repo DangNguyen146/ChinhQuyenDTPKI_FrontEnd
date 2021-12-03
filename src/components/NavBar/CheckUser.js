@@ -27,12 +27,7 @@ class User extends Component {
           <ul className="dropdown-menu" aria-labelledby="navbarDropdownUser">
             <li>
               <a className="dropdown-item" href="#">
-                Action
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                Another action
+                Quản lí tài khoản
               </a>
             </li>
             <li>
@@ -51,41 +46,6 @@ class User extends Component {
             </li>
           </ul>
         </>
-
-        // <div className="dropdown">
-        //   <a
-        //     className="text-dark text-decoration-none dropdown-toggle px-3"
-        //     data-bs-toggle="dropdown"
-        //     data-bs-display="static"
-        //     aria-expanded="false"
-        //     style={{ cursor: "pointer" }}
-        //   >
-        //     Chào, {userData.username}
-        //   </a>
-        //   <ul className="dropdown-menu dropdown-menu-lg-end">
-        //     <li>
-        //       <a className="dropdown-item" href="#">
-        //         Menu item
-        //       </a>
-        //     </li>
-        //     <li>
-        //       <a className="dropdown-item" href="#">
-        //         Menu item
-        //       </a>
-        //     </li>
-        //     <li>
-        //       <Link
-        //         className="dropdown-item"
-        //         onClick={() => {
-        //           this.handelOnLogout();
-        //         }}
-        //         to="/"
-        //       >
-        //         Đăng xuất
-        //       </Link>
-        //     </li>
-        //   </ul>
-        // </div>
       );
     } else {
       return (

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class SliderCarosel extends Component {
   render() {
     return (
-      <div className="Slider mt-1">
+      <div className="Slider mt-1 wow animate__fadeInDown" data-wow-delay="0s">
         <div
           id="carouselControls"
           className="carousel slide"
