@@ -22,6 +22,7 @@ class NopHoSo extends Component {
       title: "",
       description: "",
       hoso: null,
+      hosoduocky:'',
       category: this.props.match.params.id.split("-")[0],
       field: this.props.match.params.id.split("-")[1],
     };

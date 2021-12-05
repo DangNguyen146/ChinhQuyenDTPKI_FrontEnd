@@ -15,8 +15,10 @@ import listQuestionUserReducer from "../../container/HomeTemplate/HoiDap/HoiDapD
 import listQuestionThuongGapReducer from "../../container/HomeTemplate/HoiDap/HoiDapThuongGap/modules/reducer";
 import userResendReducer from "../../container/HomeTemplate/ManagerUser/ResendMaXacThuc/modules/reducer";
 import userResetLoginReducer from "../../container/HomeTemplate/ManagerUser/LoginRestPassword/modules/reducer";
+import listChiTietHoSoKyReducer from "../../container/HomeTemplate/TinhTrangHoSo/TinhTrangChiTiet/modules/reducer";
 
 import userLoginAdminReducer from "../../container/AdminTemplate/AdminPage/modules/reducer";
+import listKyHoSoReducer from "../../container/AdminTemplate/Dashboard/modulesKyFile/reducer";
 import listHoSoReducer from "../../container/AdminTemplate/Dashboard/modules/reducer";
 
 const rootReducer = combineReducers({
@@ -35,6 +37,8 @@ const rootReducer = combineReducers({
   listQuestionThuongGapReducer,
   userResendReducer,
   userResetLoginReducer,
+  listKyHoSoReducer,
+  listChiTietHoSoKyReducer,
 
   userLoginAdminReducer,
   listHoSoReducer,

@@ -15,11 +15,18 @@ import Dashboard from "../container/AdminTemplate/Dashboard";
 import HoiDapForm from "../container/HomeTemplate/HoiDap/HoiDapForm";
 import ResendMaXacThuc from "../container/HomeTemplate/ManagerUser/ResendMaXacThuc";
 import LoginRestPassword from "../container/HomeTemplate/ManagerUser/LoginRestPassword";
+import TinhTrangChiTiet from "../container/HomeTemplate/TinhTrangHoSo/TinhTrangChiTiet";
+import DoiMatKhau from "../container/HomeTemplate/DoiMatKhau";
 
 const routeHome = [
   {
     path: "/",
     component: HomePage,
+    exact: true,
+  },
+  {
+    path: "/quanlytaikhoan",
+    component: DoiMatKhau,
     exact: true,
   },
   {
@@ -90,6 +97,11 @@ const routeHome = [
   {
     path: "/resendMaXacThuc",
     component: ResendMaXacThuc,
+    exact: false,
+  },
+  {
+    path: "/chititetinhtrang/:id",
+    component: TinhTrangChiTiet,
     exact: false,
   },
 ];

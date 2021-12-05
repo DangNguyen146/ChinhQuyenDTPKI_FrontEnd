@@ -28,7 +28,6 @@ class DetailHoSoPage extends Component {
           <div className="container bg-white py-3">
             <h2 className="text-center me-3 pt-2">{data.title}</h2>
             <p className="container px-2 my-5">{data.description}</p>
-            {console.log(data.hoso)}
             {data.hoso.slice(-3) === "pdf" ? (
               <div className="container">
                 <iframe

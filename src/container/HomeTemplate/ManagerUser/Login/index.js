@@ -6,7 +6,7 @@ import { urlApi } from "../../../../config/api";
 import { Link } from "react-router-dom";
 import { fetchResetPasswordApi } from "./modules/actionReset";
 import toast, { Toaster } from "react-hot-toast";
-import { GoogleLogin } from "react-google-login";
+import GoogleLogin from "react-google-login";
 import { fetchGoogleLoginApi } from "./modules/actionGoogleLogin";
 import FacebookLogin from "react-facebook-login";
 
@@ -40,7 +40,6 @@ class Login extends Component {
   };
   renderNoti = () => {
     const { err } = this.props;
-    console.log(err);
     if (err) {
       const erros = err;
       return (
@@ -94,9 +93,7 @@ class Login extends Component {
     const responseGoogle = (response) => {
       this.props.fetchLoginGoogle(response.tokenId, this.props.history);
     };
-    const responseFacebook = (response) => {
-      console.log(response);
-    };
+    const responseFacebook = (response) => {};
 
     const notify = () => toast.success("Vui lòng check mail");
     return (
@@ -220,7 +217,7 @@ class Login extends Component {
                 </div>
                 <div className="mt-5">
                   <GoogleLogin
-                    clientId="176086686228-v8o6usaae3vfhjnt1n8gslkjb32tvpfo.apps.googleusercontent.com"
+                    clientId="387161080981-qlu4lq9k4vt08b3r5663kmocmjftankt.apps.googleusercontent.com"
                     buttonText="Login"
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}

@@ -26,9 +26,9 @@ class User extends Component {
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdownUser">
             <li>
-              <a className="dropdown-item" href="#">
+              <Link className="dropdown-item" to="/quanlytaikhoan">
                 Quản lí tài khoản
-              </a>
+              </Link>
             </li>
             <li>
               <hr className="dropdown-divider" />

@@ -78,7 +78,6 @@ const actFieldFailed = (err) => {
 };
 
 export const actGetHoSoApi = (field_id) => {
-  console.log(field_id);
   return (dispatch) => {
     dispatch(actHoSoRequest());
     Axios({

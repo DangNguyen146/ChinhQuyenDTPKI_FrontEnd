@@ -45,7 +45,6 @@ class ResenMaXacThuc extends Component {
     if (data) return <div className="alert alert-success p-2">{data}</div>;
     const { err } = this.props;
     if (err && err.errors) {
-      console.log(err.errors);
       const erros = err.errors;
       return <div className="alert alert-danger p-2">Sai Email/Mật khẩu</div>;
     }

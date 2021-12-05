@@ -30,7 +30,6 @@ class FileHoSo extends Component {
                 Download file
               </Link>
               <p className="container px-2 my-2">{item.description}</p>
-              {console.log(item.namehoso)}
               {item.namehoso === "pdf" ? (
                 <div className="container">
                   <iframe

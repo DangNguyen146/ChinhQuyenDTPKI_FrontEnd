@@ -2,19 +2,368 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loader from "../../../components/Loader";
 import { actListHoSoApi } from "./modules/action";
+import { actKyListHoSoApi } from "./modulesKyFile/action";
+import toast, { Toaster } from "react-hot-toast";
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: 1,
+    };
+  }
   componentDidMount() {
     document.title = "Dich vụ công | Trạng thái hồ sơ";
-    this.props.fetchListHoSo();
+    this.props.fetchListHoSo(this.state.page);
   }
+
   render() {
+    const notify = () => toast.success("Đã ký thành công");
+    const renderPgtination = () => {
+      const { loading, data } = this.props;
+      if (loading) return <Loader />;
+      if (data !== null && data.previous === null && data.next === null) {
+        return (
+          <nav aria-label="Page navigation example">
+            <ul className="pagination">
+              <li className="page-item disabled">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page - 1);
+                    this.setState({ page: this.state.page - 1 });
+                  }}
+                >
+                  Previous
+                </a>
+              </li>
+              <li className="page-item disabled">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page - 1);
+                    this.setState({ page: this.state.page - 1 });
+                  }}
+                >
+                  {this.state.page - 1}
+                </a>
+              </li>
+              <li className="page-item disabled">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page);
+                    this.setState({ page: this.state.page });
+                  }}
+                >
+                  {this.state.page}
+                </a>
+              </li>
+              <li className="page-item disabled">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page + 1);
+                    this.setState({ page: this.state.page + 1 });
+                  }}
+                >
+                  {this.state.page + 1}
+                </a>
+              </li>
+              <li className="page-item disabled">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page + 1);
+                    this.setState({ page: this.state.page + 1 });
+                  }}
+                >
+                  Next
+                </a>
+              </li>
+            </ul>
+          </nav>
+        );
+      }
+      if (data !== null && data.previous === null && data.next !== null) {
+        return (
+          <nav aria-label="Page navigation example">
+            <ul className="pagination">
+              <li className="page-item disabled">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page - 1);
+                    this.setState({ page: this.state.page - 1 });
+                  }}
+                >
+                  Previous
+                </a>
+              </li>
+              <li className="page-item disabled">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page - 1);
+                    this.setState({ page: this.state.page - 1 });
+                  }}
+                >
+                  {this.state.page - 1}
+                </a>
+              </li>
+              <li className="page-item ">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page);
+                    this.setState({ page: this.state.page });
+                  }}
+                >
+                  {this.state.page}
+                </a>
+              </li>
+              <li className="page-item ">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page + 1);
+                    this.setState({ page: this.state.page + 1 });
+                  }}
+                >
+                  {this.state.page + 1}
+                </a>
+              </li>
+              <li className="page-item">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page + 1);
+                    this.setState({ page: this.state.page + 1 });
+                  }}
+                >
+                  Next
+                </a>
+              </li>
+            </ul>
+          </nav>
+        );
+      }
+      if (data !== null && data.previous !== null && data.next === null) {
+        return (
+          <nav aria-label="Page navigation example">
+            <ul className="pagination">
+              <li className="page-item">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page - 1);
+                    this.setState({ page: this.state.page - 1 });
+                  }}
+                >
+                  Previous
+                </a>
+              </li>
+              <li className="page-item">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page - 1);
+                    this.setState({ page: this.state.page - 1 });
+                  }}
+                >
+                  {this.state.page - 1}
+                </a>
+              </li>
+              <li className="page-item">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page);
+                    this.setState({ page: this.state.page });
+                  }}
+                >
+                  {this.state.page}
+                </a>
+              </li>
+              <li className="page-item disabled">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page + 1);
+                    this.setState({ page: this.state.page + 1 });
+                  }}
+                >
+                  {this.state.page + 1}
+                </a>
+              </li>
+              <li className="page-item disabled">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page + 1);
+                    this.setState({ page: this.state.page + 1 });
+                  }}
+                >
+                  Next
+                </a>
+              </li>
+            </ul>
+          </nav>
+        );
+      }
+      if (data !== null && data.previous !== null && data.next !== null) {
+        return (
+          <nav aria-label="Page navigation example">
+            <ul className="pagination">
+              <li className="page-item">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page - 1);
+                    this.setState({ page: this.state.page - 1 });
+                  }}
+                >
+                  Previous
+                </a>
+              </li>
+              <li className="page-item">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page - 1);
+                    this.setState({ page: this.state.page - 1 });
+                  }}
+                >
+                  {this.state.page - 1}
+                </a>
+              </li>
+              <li className="page-item">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page);
+                    this.setState({ page: this.state.page });
+                  }}
+                >
+                  {this.state.page}
+                </a>
+              </li>
+              <li className="page-item">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page + 1);
+                    this.setState({ page: this.state.page + 1 });
+                  }}
+                >
+                  {this.state.page + 1}
+                </a>
+              </li>
+              <li className="page-item ">
+                <a
+                  className="page-link"
+                  href="#"
+                  onClick={() => {
+                    this.props.fetchListHoSo(this.state.page + 1);
+                    this.setState({ page: this.state.page + 1 });
+                  }}
+                >
+                  Next
+                </a>
+              </li>
+            </ul>
+          </nav>
+        );
+      }
+      return (
+        <>
+          <li className="page-item">
+            <a
+              className="page-link"
+              onClick={() => {
+                this.props.fetchListHoSo(this.state.page.page - 1);
+                this.setState({ page: this.state.page - 1 });
+              }}
+            >
+              Previous
+            </a>
+          </li>
+          <li className="page-item">
+            <a
+              className="page-link "
+              href="#"
+              onClick={() => {
+                this.props.fetchListHoSo(this.state.page.page - 1);
+                this.setState({ page: this.state.page - 1 });
+              }}
+            >
+              {this.state.page - 1}
+            </a>
+          </li>
+          <li className="page-item active" aria-current="page">
+            <a
+              className="page-link"
+              href="#"
+              onClick={() => {
+                this.props.fetchListHoSo(this.state.page.page);
+                this.setState({ page: this.state.page });
+              }}
+            >
+              {this.state.page}
+            </a>
+          </li>
+          <li className="page-item disabled">
+            <a
+              className="page-link"
+              href="#"
+              onClick={() => {
+                this.props.fetchListHoSo(this.state.page);
+                this.setState({ page: this.state.page });
+              }}
+            >
+              {this.state.page + 1}
+            </a>
+          </li>
+          <li className="page-item disabled">
+            <a
+              className="page-link"
+              href="#"
+              onClick={() => {
+                this.props.fetchListHoSo(this.state.page);
+                this.setState({ page: this.state.page });
+              }}
+            >
+              Next
+            </a>
+          </li>
+        </>
+      );
+    };
     const renderHtml = () => {
       const { loading, data } = this.props;
       if (loading) return <Loader key={9999999} />;
       return (
         data &&
-        data.map((item) => {
+        data.results.map((item) => {
           return (
             <>
               <div className="col-12">
@@ -60,7 +409,15 @@ class Dashboard extends Component {
                   <p className="my-2 text-black-50">
                     Loại: <strong>{item.field}</strong>
                   </p>
-                  <button className="btn btn-primary float-end px-5">Ký</button>
+                  <button
+                    className="btn btn-primary float-end px-5"
+                    onClick={() => {
+                      this.props.fetchKyListHoSo(item.id);
+                      notify();
+                    }}
+                  >
+                    Ký
+                  </button>
                 </div>
               </div>
             </>
@@ -70,10 +427,12 @@ class Dashboard extends Component {
     };
     return (
       <div className="mt-5 pt-5">
-        <div className="container bg-white rounded shadow">
+        <div className="container bg-white rounded shadow py-5">
           <h2 className="text-center pt-3">Hồ sơ</h2>
           <div className="container mt-5 mb-2">
-            <div className="row">{renderHtml()}</div>
+            <div className="row py-3">{renderHtml()}</div>
+            <div className="mt-1 pb-4 float-end">{renderPgtination()}</div>
+            <Toaster />
           </div>
         </div>
       </div>
@@ -90,8 +449,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchListHoSo: () => {
-      dispatch(actListHoSoApi());
+    fetchListHoSo: (page) => {
+      dispatch(actListHoSoApi(page));
+    },
+    fetchKyListHoSo: (id) => {
+      dispatch(actKyListHoSoApi(id));
     },
   };
 };

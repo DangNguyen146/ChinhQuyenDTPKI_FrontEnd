@@ -40,6 +40,12 @@ class TinhTrangHoSo extends Component {
                     <p className="my-2 text-black-50">
                       Thời gian: {item.created_date}
                     </p>
+                    <Link
+                      className="btn btn-primary float-end"
+                      to={"/chititetinhtrang/" + item.id}
+                    >
+                      Xem chi tiết
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -50,7 +56,7 @@ class TinhTrangHoSo extends Component {
     };
     return (
       <div className="mt-5 pt-5">
-        <div className="container bg-white rounded shadow">
+        <div className="container bg-white rounded shadow py-3">
           <h2 className="text-center pt-3">Tình trang hồ sơ</h2>
           <div className="container mt-5 mb-2">
             <div className="row">{renderHtml()}</div>

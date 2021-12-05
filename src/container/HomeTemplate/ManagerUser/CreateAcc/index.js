@@ -31,7 +31,6 @@ class CreateAcc extends Component {
   renderNoti = () => {
     const { err } = this.props;
     if (err) {
-      console.log(err.errors);
       const erros = err.errors;
       return (
         <div className="alert alert-danger p-2">
